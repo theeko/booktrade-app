@@ -1,0 +1,29 @@
+<html>
+  <head>
+    <title>Booktrade App</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" >
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/stylesheets/custom.css">
+    <script src="/lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="/lib/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="/javascripts/angularApp.js"></script>
+  </head>
+  <body ng-app="myApp">
+    <div class="navbar navbar-default navbar-static-top">
+      <div class="container">
+      	<div class="navbar-header">	
+      		<div class="navbar-brand"><a href="#/home">Booktrader</a></div>
+      	</div>
+          <ul class="nav navbar-nav navbar-right" ng-controller="NavCtrl">
+            <li ><a ng-href="/#/polls">Polls</a></li>
+            <li ng-show="isLoggedIn()"><a ng-href="/#/profile">{{ currentUser() }}</a></li>
+            <li ng-show="isLoggedIn()"><a href="" ng-click="logOut()">Log Out</a></li>
+            <li ng-hide="isLoggedIn()"><a ng-href="/#/login">Log In</a></li>
+            <li ng-hide="isLoggedIn()"><a ng-href="/#/register">Register</a></li>
+          </ul>
+      </div>
+    </div>
+        <ui-view></ui-view>
+  </body>
+</html>

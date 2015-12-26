@@ -1,0 +1,22 @@
+{
+  "name": "mean-book",
+  "version": "0.0.0",
+  "authors": [
+    "kairath <thekairath@hotmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "dependencies": {
+    "angular": "~1.4.8",
+    "angular-ui": "~0.4.0",
+    "jquery": "~2.1.4",
+    "bootstrap": "~3.3.6"
+  },
+  "devDependencies": {
+    "jasmine-core": "jasmine#~2.4.1"
+  }
+}
