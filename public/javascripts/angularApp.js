@@ -16,16 +16,6 @@
               //       }]
               //   }
               })
-            .state('pollresult', {
-                url: '/polls/{id}',
-                templateUrl: '/pollresult.html',
-                controller: 'pollresultCtrl',
-                resolve: {
-                    poll: ['$stateParams', 'polls', function ($stateParams, polls) {
-                        return polls.get($stateParams.id);
-                    }]
-                }
-            })
             .state('profile', {
               url: '/profile',
               templateUrl: '/profile.html',
@@ -38,27 +28,6 @@
                 pollPromise: ['polls', 'auth', function (polls, auth) {
                     return polls.authorsPolls(auth.currentUser());
                   }]}
-              })
-              .state('polls', {
-                url: '/polls',
-                templateUrl: '/polls.html',
-                controller: 'pollCtrl',
-                resolve: {
-                  pollsResolve: ["polls",function(polls){
-                    return polls.getAll();
-                  }]},
-                  poll: ['$stateParams', 'polls', function ($stateParams, polls) {
-                        return polls.get($stateParams.id);
-                    }]
-              })
-            .state('newpoll', {
-                url: '/newpoll',
-                templateUrl: '/newpoll.html',
-                controller: 'newpollCtrl',
-                onEnter: ["$state", "auth", function($state, auth){
-                if(!auth.isLoggedIn()){
-                  $state.go("home");
-                }}]
               })
             .state('register', {
               url: '/register',
@@ -83,16 +52,6 @@
           $urlRouterProvider.otherwise('home');
         }
     ]);
-  
-  app.controller("pollCtrl", ["polls","auth","$scope", function(polls, auth, $scope){
-      $scope.polls = polls.polls;
-      
-      $scope.upvote= function(poll, pollid,index){
-        if(!auth.isLoggedIn()){ return; }
-        polls.upvote(poll, pollid,index);
-        
-      };
-  }]);
   
   app.controller("profileCtrl", ["polls","auth","$scope", "poll", function(polls, auth, $scope, poll){
       $scope.currentUser = auth.currentUser();

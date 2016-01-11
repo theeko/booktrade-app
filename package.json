@@ -1,5 +1,5 @@
 {
-  "name": "vote-app",
+  "name": "meanbook",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -16,6 +16,7 @@
     "ejs": "^2.3.4",
     "express": "~4.13.1",
     "express-jwt": "^3.3.0",
+    "express-session": "^1.12.1",
     "json-web-token": "^1.6.3",
     "jsonwebtoken": "^5.4.1",
     "mongoose": "^4.2.9",
