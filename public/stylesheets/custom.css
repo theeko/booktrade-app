@@ -1,2 +1,9 @@
 .jcont {background: black; padding: 40px; margin-top: -30px; background: #4183D7; color: #d3d3d3; height: 60%;}
 .fa-book { font-size: 6em; padding-bottom: 20px; }
+form input { margin-top: 10px; }
+form button {margin-top: 10px; background: #d3d3d3; }
+form { margin: 10px 0; }
+.fa-cog { font-size: 1.3em; }
+.well .btn-danger { position: absolute; right: 5px; top: 5px; }
+.well img { width: 90%; margin: 0 5%; height: 200px; }
+.well { margin: 10px }

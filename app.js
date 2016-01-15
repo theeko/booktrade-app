@@ -1,6 +1,9 @@
 require('./models/Users');
+require("./models/Books");
 var mongoose = require('mongoose');
-var User = mongoose.model('User');var express = require('express');
+var User = mongoose.model('User');
+var Book = mongoose.model("Book");
+var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');

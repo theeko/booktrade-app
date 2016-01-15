@@ -8,6 +8,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
     <script src="/lib/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="/javascripts/angularApp.js"></script>
+    <script src="/javascripts/angularCtrls.js"></script>
+    <script src="/javascripts/angularFactories.js"></script>
   </head>
   <body ng-app="myApp">
     <div class="navbar navbar-default navbar-static-top">
@@ -16,8 +18,9 @@
       		<div class="navbar-brand"><a href="#/home">Booktrader</a></div>
       	</div>
           <ul class="nav navbar-nav navbar-right" ng-controller="NavCtrl">
-            <li ><a ng-href="/#/polls">BookList</a></li>
-            <li ng-show="isLoggedIn()"><a ng-href="/#/profile">{{ currentUser() }}</a></li>
+            <li ><a ng-href="/#/allbooks">BookList</a></li>
+            <li ng-show="isLoggedIn()"><a ng-href="/#/newbook">Create New Book</a></li>
+            <li ng-show="isLoggedIn()"><a ng-href="/#/profile"><i class="fa fa-cog"></i></a></li>
             <li ng-show="isLoggedIn()"><a href="" ng-click="logOut()">Log Out</a></li>
             <li ng-hide="isLoggedIn()"><a ng-href="/#/login">Log In</a></li>
             <li ng-hide="isLoggedIn()"><a ng-href="/#/register">Register</a></li>
@@ -25,5 +28,11 @@
       </div>
     </div>
         <ui-view></ui-view>
+        <div class="col-md-12">
+          <hr/>
+        <div class="container">
+        <a href="https://github.com/thekairath" target="_blank" >Kairath Github</a>
+        </div>
+        </div>
   </body>
 </html>

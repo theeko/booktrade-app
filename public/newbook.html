@@ -1,0 +1,12 @@
+<div class="container">
+    <div class="col-md-6 col-md-offset-3">
+      <div ng-show="msg">{{msg}}</div>
+      <h3>New Book</h3>
+      <form class="form-group" ng-submit="createNewBook()">
+        <input type="text" class="form-control" ng-model="booktitle" placeholder="Book Title"/>
+        <input type="text" class="form-control" ng-model="imgurl" placeholder="Img Url"/>
+        <input type="text" class="form-control" ng-model="desc" placeholder="Book Description"/>
+        <button class="btn btn-info" type="submit">Create New Book</button>
+      </form>
+    </div>
+</div>

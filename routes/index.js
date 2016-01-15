@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
+var Book = mongoose.model('Book');
 var express = require('express');
 var jwt = require('express-jwt');
 var passport = require('passport');
@@ -45,6 +46,15 @@ router.post('/login', function(req, res, next){
     })(req, res, next);
 });
 
-
+router.post("/newbook", auth, function(req,res,next){
+  var book = new Book(req.body);
+  book.owner = req.payload.username;
+  
+  book.save(function (err,book) {
+    if(err){ return next(err); }
+    res.json(book);
+  });
+  
+});
 
 module.exports = router;
