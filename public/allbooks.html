@@ -1,10 +1,9 @@
 <div class="container">
-    <div class="col-md-10 col-md-offset-1" ng-repeat={book in books}>
-        <div class="sampleimg well col-md-3">
-            <img ng-src={{book.url}} />
+    <div class="col-md-10 col-md-offset-1" ng-repeat="book in books">
+        <div class="well col-md-3">
             <h5>{{book.title}}</h5>
             <p>{{book.desc.length > 20 ? book.desc.slice(0,20) + "..." : book.desc}} </p>
-            <button ng-show="{{book.user == currentUser}}" class="btn btn-danger">X</button>
+            <button  class="btn btn-danger" ng-click="deleteBook(book._id)">X</button> <!--ng-show="{{book.user == currentUser}}"-->
         </div>
     </div>
 </div>

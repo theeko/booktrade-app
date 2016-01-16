@@ -1,12 +1,41 @@
 angular.module("myApp").factory("bookFact", ["$http", "auth",function($http, auth){
 var o = { books: [] };
   o.createBook = function(bookdata){
-    $http.post("/newbook", data, {
+    $http.post("/newbook", bookdata, {
       headers: { Authorization: "Bearer " + auth.getToken() }
     }).success(function (data) {
       o.books.push(data);
-    })
-  }
+    });
+  };
+  
+  o.getAllBooks = function(){
+    return $http.get("/allbooks").success(function(data){
+     o.books = data;
+    });
+  };
+  
+  o.deleteBook = function(id){
+    return $http.delete("/deletebook/" + id,null,{
+      headers: {Authorization: 'Bearer ' + auth.getToken() }
+    }).success(function(data){
+      var ind = o.books.indexOf(data);
+      return o.books.splice(ind,1);
+    });
+  };
+  
+  o.getuserProfile = function(username) {
+    $http.get("/userprofile/" + username).success(function(data) {
+        return data;
+    });
+  };
+  
+  o.updateProfile = function (profiledata) {
+   $http.put("/updateprofile", profiledata,{
+      headers: {Authorization: 'Bearer ' + auth.getToken() }
+    }).success(function(data){
+      return data;
+    });
+  };
 
 return o;
 }]);

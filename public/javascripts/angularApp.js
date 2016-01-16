@@ -18,13 +18,13 @@ angular.module("myApp", [ "ui.router"])
         .state("bookz", {
           url: "/allbooks",
           templateUrl: "/allbooks.html",
-          controller: "allbooksCtrl"
-          // resolve: {
-          //   allbooks: ["$stateParams", "bookFact", function(bookFact){
-          //       return bookFact.getAllBooks();
-          //     }
-          //   ]
-          // }
+          controller: "allbooksCtrl",
+          resolve: {
+            allbooks: ["bookFact", function(bookFact){
+                return bookFact.getAllBooks();
+              }
+            ]
+          }
         })
         .state("theBook", {
           url: "/book/{id}",
@@ -38,13 +38,18 @@ angular.module("myApp", [ "ui.router"])
           }
         })
         .state('profile', {
-          url: '/profile',
+          url: '/profile/{username}',
           templateUrl: '/profile.html',
           controller: 'profileCtrl',
           onEnter: ["$state", "auth", function($state, auth){
             if(!auth.isLoggedIn()){
               $state.go("home");
             }}]
+          // resolve: {
+          //   profileData: ["bookFact","$stateParams", function (bookFact,$stateParams) {
+          //     return bookFact.getuserProfile($stateParams.username);
+          //   }]
+          // }
           })
         .state('register', {
           url: '/register',

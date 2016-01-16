@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
 var Book = mongoose.model('Book');
+var Profile = mongoose.model('Profile');
 var express = require('express');
 var jwt = require('express-jwt');
 var passport = require('passport');
@@ -55,6 +56,29 @@ router.post("/newbook", auth, function(req,res,next){
     res.json(book);
   });
   
+});
+
+router.get("/allbooks", function(req, res, next) {
+  Book.find({}, function(err,books){
+    if(err){ return next(err); }
+    res.json(books);
+  }); 
+});
+
+router.delete("/deletebook/:id", function (req,res,next) {
+  Book.find({_id: req.params.id}, function(err, book) {
+    if(err){ return next(err) }
+  }).remove(function(err,book){
+          if(err){ next(err) }
+          res.json(book);
+        });
+});
+
+router.get("/userprofile/username", function(req, res, next) {
+  Profile.findOne({ username: req.params.username},function (err,user) {
+    if(err){ next(err) }
+    res.json(user);
+  });
 });
 
 module.exports = router;

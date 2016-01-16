@@ -1,21 +1,30 @@
-angular.module("myApp").controller("profileCtrl", ["auth","$scope", function( auth, $scope ){
+angular.module("myApp").controller("profileCtrl", [
+  "auth","$scope","profileData","bookFact",function( auth, $scope,profileData,bookFact){
+    
   $scope.currentUser = auth.currentUser();
+  $scope.profileData = profileData;
+  $scope.updateProfile = function () {
+    bookFact.updateProfile($scope.currentUser);
+  };
 }]);
 
 angular.module("myApp").controller("mainCtrl", ["$scope", "bookFact", "auth", function($scope, bookFact, auth){
   $scope.isLoggedIn = auth.isLoggedIn;
   $scope.createNewBook = function(){
     if(!$scope.isLoggedIn){ $scope.msg = "Must loging for creating a book"; return; }
-    if(!$scope.booktitle && !$scope.desc && !$scope.imgurl){ $scope.msg = "Fill all fields"; return; }
-    bookFact.createBook({title: $scope.title,imgurl: $scope.imgurl, desc: $scope.desc});
-    $scope.title = "";
-    $scope.imgurl = "";
-    $scope.desc = "";
-    $scope.msg = "New book created";
-    setTimeout(function () {
-      $scope.msg = "";
-      window.location.reload();
-    },2000);
+    if($scope.booktitle && $scope.desc  && $scope.imgurl ){
+      bookFact.createBook({title: $scope.booktitle,imgurl: $scope.imgurl, desc: $scope.desc});
+      $scope.booktitle = "";
+      $scope.imgurl = "";
+      $scope.desc = "";
+      $scope.msg = "New book created";
+      setTimeout(function () {
+        $scope.msg = "";
+        window.location.reload();
+      },2000);
+    } else {
+      { $scope.msg = "Fill all fields"; return; }
+    }
   };
 
 }]);
@@ -25,8 +34,11 @@ angular.module("myApp").controller("booksCtrl", ["auth", "$scope", function (aut
   
 }]);
 
-angular.module("myApp").controller("allbooksCtrl", ["auth", "$scope", function (auth, $scope) {
-  
+angular.module("myApp").controller("allbooksCtrl", ["auth", "$scope","bookFact", function (auth, $scope, bookFact) {
+  $scope.books = bookFact.books;
+  $scope.deleteBook = function(id){
+    bookFact.deleteBook(id);
+  }
 }]);
   
 angular.module("myApp").controller('AuthCtrl', [
