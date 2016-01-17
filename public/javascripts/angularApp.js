@@ -38,18 +38,18 @@ angular.module("myApp", [ "ui.router"])
           }
         })
         .state('profile', {
-          url: '/profile/{username}',
+          url: '/profile',
           templateUrl: '/profile.html',
           controller: 'profileCtrl',
           onEnter: ["$state", "auth", function($state, auth){
             if(!auth.isLoggedIn()){
               $state.go("home");
-            }}]
-          // resolve: {
-          //   profileData: ["bookFact","$stateParams", function (bookFact,$stateParams) {
-          //     return bookFact.getuserProfile($stateParams.username);
-          //   }]
-          // }
+            }}],
+          resolve: {
+            profileData: ["profileFac","auth", function (profileFac,auth) {
+              return profileFac.getuserProfile(auth.currentUser());
+            }]
+          }
           })
         .state('register', {
           url: '/register',

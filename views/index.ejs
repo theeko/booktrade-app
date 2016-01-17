@@ -20,7 +20,7 @@
           <ul class="nav navbar-nav navbar-right" ng-controller="NavCtrl">
             <li ><a ng-href="/#/allbooks">BookList</a></li>
             <li ng-show="isLoggedIn()"><a ng-href="/#/newbook">Create New Book</a></li>
-            <li ng-show="isLoggedIn()"><a ng-href="/#/profile/{{currentUser}}"><i class="fa fa-cog"></i></a></li>
+            <li ng-show="isLoggedIn()"><a ng-href="/#/profile"><i class="fa fa-cog"></i></a></li>
             <li ng-show="isLoggedIn()"><a href="" ng-click="logOut()">Log Out</a></li>
             <li ng-hide="isLoggedIn()"><a ng-href="/#/login">Log In</a></li>
             <li ng-hide="isLoggedIn()"><a ng-href="/#/register">Register</a></li>

@@ -22,22 +22,29 @@ var o = { books: [] };
       return o.books.splice(ind,1);
     });
   };
-  
-  o.getuserProfile = function(username) {
-    $http.get("/userprofile/" + username).success(function(data) {
-        return data;
-    });
-  };
-  
-  o.updateProfile = function (profiledata) {
-   $http.put("/updateprofile", profiledata,{
-      headers: {Authorization: 'Bearer ' + auth.getToken() }
-    }).success(function(data){
-      return data;
-    });
-  };
 
 return o;
+}]);
+
+angular.module("myApp").factory("profileFac",["auth","$http", function(auth,$http){
+ var x = { profile: [] };
+ 
+  x.getuserProfile = function(username) {
+    return $http.get("/userprofile/" + username).success(function(data) {
+        return x.profile = data;
+    });
+  };
+  
+  x.updateProfile = function (profiledata) {
+    $http.put("/updateprofile/" + auth.currentUser(), profiledata,{
+      headers: {Authorization: 'Bearer ' + auth.getToken() }
+    }).success(function(data){
+       x.profile = data;
+       window.location.reload();
+    });
+  };
+  
+  return x; 
 }]);
 
 angular.module("myApp").factory("auth", ["$http", '$window', function($http, $window){

@@ -1,8 +1,12 @@
-<div class="col-md-6 col-md-offset-3">
-    <div ng-show="error" class="alert alert-danger row">
-    <span>{{ error.message }}</span>
+<div class="container">
+  <div class="col-md-6 col-md-offset-3">
+    <div class="bookoffers">
+      <h3>Trades</h3>
     </div>
-    
+    <hr />
+    <div ng-show="message" class="alert alert-success row">
+    <span>{{ message }}</span>
+    </div>
     <form ng-submit="updateProfile()"
     style="margin-top:30px;">
     <h3>Update Profile</h3>
@@ -10,21 +14,22 @@
     <div class="form-group">
     <input type="text"
     class="form-control"
-    placeholder="Full Name"
-    ng-model="fullname"></input>{{profileData.country}}
+    placeholder="{{fullname ? fullname : 'Full name'}}"
+    ng-model="fullname"></input>
     </div>
     <div class="form-group">
     <input type="text"
     class="form-control"
-    placeholder="Country"
+    placeholder="{{country ? country : 'Country'}}"
     ng-model="country"></input>
     </div>
     <div class="form-group">
     <input type="text"
     class="form-control"
-    placeholder="State"
+    placeholder="{{state ? state : 'State'}}"
     ng-model="state"></input>
     </div>
     <button type="submit" class="btn btn-primary" >Update Profile</button>
     </form>
+  </div>
 </div>

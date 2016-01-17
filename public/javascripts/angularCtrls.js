@@ -1,10 +1,20 @@
 angular.module("myApp").controller("profileCtrl", [
-  "auth","$scope","profileData","bookFact",function( auth, $scope,profileData,bookFact){
-    
+  "auth","$scope","profileFac","profileData",function( auth, $scope,profileFac,profileData){
+  $scope.message = "";
   $scope.currentUser = auth.currentUser();
-  $scope.profileData = profileData;
-  $scope.updateProfile = function () {
-    bookFact.updateProfile($scope.currentUser);
+  if(!!profileData.data){
+    $scope.profileData = profileData.data;
+    $scope.fullname = $scope.profileData.fullname;
+    $scope.country = $scope.profileData.country;
+    $scope.state = $scope.profileData.state;
+  }
+  $scope.updateProfile = function() {
+    if($scope.country && $scope.fullname && $scope.state){
+      profileFac.updateProfile({username: $scope.currentUser, country: $scope.country, state: $scope.state, fullname: $scope.fullname});
+    } else {
+      return;
+    }
+   
   };
 }]);
 
@@ -70,7 +80,7 @@ angular.module("myApp").controller('NavCtrl', [
 'auth',
 function($scope, auth){
   $scope.isLoggedIn = auth.isLoggedIn;
-  $scope.currentUser = auth.currentUser;
+  $scope.currentUser = auth.currentUser();
   $scope.logOut = auth.logOut;
 }]);
   

@@ -74,11 +74,31 @@ router.delete("/deletebook/:id", function (req,res,next) {
         });
 });
 
-router.get("/userprofile/username", function(req, res, next) {
+router.put("/updateprofile/:username", function(req, res, next) {
   Profile.findOne({ username: req.params.username},function (err,user) {
     if(err){ next(err) }
-    res.json(user);
+    if(!!user){
+      if(!!req.body.fullname) {user.fullname = req.body.fullname }
+      if(!!req.body.country) {user.country = req.body.country }
+      if(!!req.body.state) {user.state = req.body.state }
+      user.save();
+      res.json(user);}
+    else {
+      var prof = new Profile(req.body);
+      prof.save(function (err) {
+        if(err) { next(err) }
+        res.json(prof);
+      });
+    }
   });
+});
+
+router.get("/userprofile/:username", function(req, res, next) {
+   Profile.findOne({ username: req.params.username}, function(err, user) {
+     console.log(user);
+       if(err) { next(err) }
+       res.json(user);
+   }); 
 });
 
 module.exports = router;
