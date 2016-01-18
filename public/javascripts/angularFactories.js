@@ -37,7 +37,7 @@ var o = { books: [], book: [] };
     });
   };
 
-return o;
+  return o;
 }]);
 
 angular.module("myApp").factory("profileFac",["auth","$http", function(auth,$http){
