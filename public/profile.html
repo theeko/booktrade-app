@@ -1,35 +1,77 @@
 <div class="container">
-  <div class="col-md-6 col-md-offset-3">
-    <div class="bookoffers">
-      <h3>Trades</h3>
+    <h4>Welcome, {{ !!profileData.fullname ? profileData.fullname : currentUser }}</h4>
+  <div class="row">
+    <div class="col-md-9">
+      <div class="bookoffers col-md-12" >
+        <h3>Messages</h3>
+        <div ng-repeat="trade in tradeMsgs track by $index">
+          <div class="well col-md-4" ng-show="trade.purposedTo == currentUser">
+            <h4>Trade offer for {{trade.purposedBook}}</h4>
+            <p>Trader offered you {{ trade.purposerBook}}</p>
+            <p>Offerer's Message to You : {{trade.messageTxt}}</p>
+            <button class="btn btn-info" ng-show="currentUser == trade.purposedTo" 
+            ng-click="acceptTrade(trade)">Accept Trade</button>
+            <span class="btn btn-danger" ng-click="dltMsg(trade)"
+            ng-show="currentUser == trade.purposedTo">Decline</span>
+          </div>
+        </div>
+      </div>
+      <hr/>
+      <div class="bookoffers col-md-12">
+        <h3>Offers Sent</h3>
+        <div ng-repeat="tradeto in tradeToMsgs track by $index">
+          <div class="well col-md-4">
+            <h4>Trade offer for {{tradeto.purposedBook}}</h4>
+            <p>Offered Book : {{ tradeto.purposerBook}}</p>
+            <p>Your Message : {{tradeto.messageTxt}}</p>
+            <button class="btn btn-danger" ng-show="currentUser == tradeto.purposer"
+            ng-click="dltMsg(tradeto)">Cancel trade</button>
+          </div>
+        </div>
     </div>
-    <hr />
-    <div ng-show="message" class="alert alert-success row">
-    <span>{{ message }}</span>
     </div>
-    <form ng-submit="updateProfile()"
-    style="margin-top:30px;">
-    <h3>Update Profile</h3>
-    
-    <div class="form-group">
-    <input type="text"
-    class="form-control"
-    placeholder="{{fullname ? fullname : 'Full name'}}"
-    ng-model="fullname"></input>
+    <hr/>
+    <div class="col-md-3">
+      <div ng-show="message" class="alert alert-success row">
+        <span>{{ message }}</span>
+      </div>
+      <form ng-submit="updateProfile()"
+      style="margin-top:30px;">
+      <h3>Update Profile</h3>
+      
+      <div class="form-group">
+      <input type="text"
+      class="form-control"
+      placeholder="{{fullname ? fullname : 'Full name'}}"
+      ng-model="fullname"></input>
+      </div>
+      <div class="form-group">
+      <input type="text"
+      class="form-control"
+      placeholder="{{country ? country : 'Country'}}"
+      ng-model="country"></input>
+      </div>
+      <div class="form-group">
+      <input type="text"
+      class="form-control"
+      placeholder="{{state ? state : 'State'}}"
+      ng-model="state"></input>
+      </div>
+      <button type="submit" class="btn btn-primary" >Update Profile</button>
+      </form>
     </div>
-    <div class="form-group">
-    <input type="text"
-    class="form-control"
-    placeholder="{{country ? country : 'Country'}}"
-    ng-model="country"></input>
-    </div>
-    <div class="form-group">
-    <input type="text"
-    class="form-control"
-    placeholder="{{state ? state : 'State'}}"
-    ng-model="state"></input>
-    </div>
-    <button type="submit" class="btn btn-primary" >Update Profile</button>
-    </form>
   </div>
+  <div class="myBooks col-md-12">
+      <h3>My Books</h3>
+      <div ng-repeat="book in books" >
+        <div class="well profilebooks col-md-3">
+            <h5>{{book.title}}</h5>
+            <img src="{book.imgurl}" onerror="$(this).attr('src','broken.png');"/>
+            <p>{{book.desc.length > 20 ? book.desc.slice(0,20) + "..." : book.desc}} </p>
+            <button class="btn btn-danger" ng-show="{{book.owner == currentUser }}"
+            ng-click="deleteUserBook(book._id)">X</button> <!--ng-show="{{book.user == currentUser}}"-->
+            <button ng-click="" class="btn btn-info" ng-show="{{book.owner != currentUser }}">Purpose Trade</button>
+        </div>
+      </div>
+    </div>
 </div>

@@ -1,6 +1,7 @@
 require('./models/Users');
 require("./models/Books");
 require("./models/Profile");
+require("./models/Messages");
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
 var Book = mongoose.model("Book");
