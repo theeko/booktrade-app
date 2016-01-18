@@ -7,3 +7,7 @@ form { margin: 10px 0; }
 .well .btn-danger { position: absolute; right: 5px; top: 5px; }
 .well img { width: 90%; margin: 0 5%; height: 200px; }
 .well { margin: 10px }
+.myBooks { position: relative; }
+.profileform { margin-top: 10px; display: block;}
+.profileform input:first-of-type { margin-top: 20px; }
+.msgform textarea {padding: 10px;}

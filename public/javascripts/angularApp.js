@@ -3,7 +3,7 @@
 angular.module("myApp", [ "ui.router"])
   
 .config(['$stateProvider', '$urlRouterProvider', 
-    function($stateProvider, $urlRouterProvider){
+        function($stateProvider, $urlRouterProvider){
       $stateProvider
         .state('home', {
           url: '/home',
@@ -29,16 +29,18 @@ angular.module("myApp", [ "ui.router"])
         .state("theBook", {
           url: "/book/{id}",
           templateUrl: "/thebook.html",
-          controller: "allbooksCtrl",
+          controller: "thebookCtrl",
           resolve: {
-            thebook: ["$stateParams", "bookFact", function($stateParams,bookFact){
-                return bookFact.getTheBook($stateParams.id);
-              }
-            ]
+            thebook: ["bookFact","$stateParams", function(bookFact, $stateParams){
+              return bookFact.getTheBook($stateParams.id);
+            }],
+            traderbooks: ["profileFac","auth", function (profileFac,auth) {
+              return profileFac.getUserBooks(auth.currentUser());
+            }]
           }
         })
         .state('profile', {
-          url: '/profile',
+          url: '/profile/{username}',
           templateUrl: '/profile.html',
           controller: 'profileCtrl',
           onEnter: ["$state", "auth", function($state, auth){
@@ -48,6 +50,25 @@ angular.module("myApp", [ "ui.router"])
           resolve: {
             profileData: ["profileFac","auth", function (profileFac,auth) {
               return profileFac.getuserProfile(auth.currentUser());
+            }],
+            userbooks: ["profileFac","auth", function (profileFac,auth) {
+              return profileFac.getUserBooks(auth.currentUser());
+            }],
+            tradeMsgs: ["profileFac","auth", function (profileFac,auth) {
+              return profileFac.getMessages(auth.currentUser());
+            }],
+            tradeToMsgs: ["profileFac","auth", function (profileFac,auth) {
+              return profileFac.getOffers(auth.currentUser());
+            }]
+          }
+          })
+          .state('usersbooks', {
+          url: '/books/{uname}',
+          templateUrl: '/allbooks.html',
+          controller: 'usersbooksCtrl',
+          resolve: {
+            theuserbooks: ["profileFac","auth","$stateParams", function (profileFac,auth,$stateParams) {
+              return profileFac.theuserbooks($stateParams.uname);
             }]
           }
           })

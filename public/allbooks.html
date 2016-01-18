@@ -1,9 +1,12 @@
 <div class="container">
-    <div class="col-md-10 col-md-offset-1" ng-repeat="book in books">
-        <div class="well col-md-3">
+    <div ng-repeat="book in books">
+        <div class="well col-md-2">
             <h5>{{book.title}}</h5>
-            <p>{{book.desc.length > 20 ? book.desc.slice(0,20) + "..." : book.desc}} </p>
-            <button  class="btn btn-danger" ng-click="deleteBook(book._id)">X</button> <!--ng-show="{{book.user == currentUser}}"-->
+            <img ng-src="{{book.imgurl}}" onerror="$(this).attr('src','broken.png');"/>
+            <p>{{book.desc.length > 40 ? book.desc.slice(0,37) + "..." : book.desc}} </p>
+            <button  class="btn btn-danger" ng-show="{{book.owner == currentUser }}" 
+            ng-click="deleteBook(book._id)">X</button> <!--ng-show="{{book.user == currentUser}}"-->
+            <button ng-click="tradePurposal(book)" class="btn btn-info" ng-show="{{book.owner != currentUser }}">Purpose Trade</button>
         </div>
     </div>
 </div>

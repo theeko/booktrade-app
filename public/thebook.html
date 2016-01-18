@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="col-md-6 col-md-offset-6">{{msg}}</div>
+<div class="col-md-12">
+  <div class="col-md-5 col-md-offset-1 ">
+    <h5>{{book.title}}</h5>
+            <img src="{book.imgurl}" onerror="$(this).attr('src','broken.png');"/>
+            <p>{{book.desc.length > 20 ? book.desc.slice(0,20) + "..." : book.desc}} </p>
+  </div>
+  <div class="col-md-5">
+    <h4>Trade</h4>
+    <div ng-show="msg">
+      <p>{{msg}}</p>
+    </div>
+    <form class="msgform form-group" ng-submit="bookTrade()">
+      <textarea ng-model="tradeMessage" rows="4" cols="50"  class="form-control" 
+      placeholder="to {{book.owner}}"/>
+      <select ng-options="traderbook.title for traderbook in traderbooks" 
+      ng-model="bookToTrade" class="form-control">
+        <option value="">-- Choose a book for offer --</option>
+      </select>
+      
+    <button type="submit" class="btn btn-success ">Trade</button>
+    </form>
+  </div>
+</div>
+</div>
